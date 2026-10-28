@@ -1,12 +1,15 @@
 // import express 
 const express = require('express');
+
 // import blogposts router
 const postsRouter = require('./routers/posts');
+const logger = require('./middlewares/logger');
 // setup 
 const app = express();
 const port = 3000;
 // collegamtno a cartella public per assets statici
 app.use(express.static('public'));
+app.use(logger)
 
 //definizione della rotta home
 app.get('/', (req,res)=>{
