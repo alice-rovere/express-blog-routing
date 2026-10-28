@@ -3,8 +3,10 @@ const express = require('express');
 
 // import blogposts router
 const postsRouter = require('./routers/posts');
+// import middleware 
 const logger = require('./middlewares/logger');
 const errorHandler = require('./middlewares/errorHandler');
+const notFound = require('./middlewares/notFound');
 
 // setup 
 const app = express();
@@ -25,6 +27,7 @@ app.get('/', (req,res)=>{
 app.use('/posts', postsRouter);
 //error handler da chiamare DOPO la definizione delle rotte!
 app.use(errorHandler);
+app.use(notFound)
 // start server
 app.listen(port, ()=> {
     console.log(`Server started at http://localhost:${port}`);
