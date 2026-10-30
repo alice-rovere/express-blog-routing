@@ -14,7 +14,6 @@ router.get('/', (req,res, next)=> {
 // res.send('Lista dei posts')
 })
 
-
 //show
 router.get('/:id', (req,res, next)=> {
     const id = req.params.id;
@@ -30,23 +29,42 @@ router.get('/:id', (req,res, next)=> {
 // res.send(`Dettaglio del post con id ${req.params.id}`)
 })
 
-
+//show
+router.get('/:id/contags', (req,res, next)=> {
+    const id = req.params.id;
+    const sql = `SELECT * FROM posts WHERE id=?`;
+    const sqlTag = ` 
+    SELECT tags.label
+    FROM tags
+    JOIN post_tag
+    ON  post_tag.tag_id = tags.id
+    WHERE post_tag.post_id = ?
+    `
+    connection.query(sql, [id], (err,results)=>{
+        if(err) return next(err);
+        if(results.length===0){
+            return res.status(404).json({error:'pizza not found'});
+        }
+        const post = results[0];
+        
+        connection.query(sqlTag,[id], (err, tagConnected)=>{
+        if(err) return next(err);
+        post.tags = tagConnected;
+        res.json(post);
+    })
+    })
+// res.send(`Dettaglio del post con id ${req.params.id}`)
+})
 
 //store
 router.post('/', (req,res)=> {
 res.send(`Creazione del nuovo post`)
 })
 
-
-
-
 //update
 router.put('/:id', (req,res)=> {
 res.send(`Modifica integrale del post con id ${req.params.id}`)
 })
-
-
-
 
 //modify
 router.patch('/:id', (req,res)=> {
@@ -68,13 +86,8 @@ router.delete('/:id', (req,res, next)=> {
         // console.log(results)
         res.sendStatus(204);
     })
-
-
-
 // res.send(`Eliminazione del post con id ${req.params.id}`)
 })
-
-
 
 
 //export

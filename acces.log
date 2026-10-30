@@ -17,3 +17,6 @@
 30/10/2026, 10:58:25 [DELETE] /posts/10 
 30/10/2026, 10:59:54 [DELETE] /posts/7 
 30/10/2026, 11:00:07 [DELETE] /posts/6 
+30/10/2026, 11:16:59 [GET] /posts/1/condettagli 
+30/10/2026, 11:17:24 [GET] /posts/1/condettagli 
+30/10/2026, 11:17:47 [GET] /posts/2/condettagli 
