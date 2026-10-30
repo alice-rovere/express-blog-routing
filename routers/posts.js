@@ -2,6 +2,7 @@
 //import
 const express = require('express');
 const router = express.Router();
+const connection = require('../data/db')
 
 //index
 router.get('/', (req,res)=> {
