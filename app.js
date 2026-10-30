@@ -19,7 +19,6 @@ app.use(logger)
 
 //definizione della rotta home
 app.get('/', (req,res)=>{
-    console.log(lorem)
     res.send('Server del mio blog')
 })
 
